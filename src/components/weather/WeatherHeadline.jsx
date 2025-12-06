@@ -5,8 +5,13 @@ import SunnyIcon from "../../assets/icons/sunny.svg";
 import PinIcon from "../../assets/pin.svg";
 import RainIcon from "../../assets/rainy.svg";
 import ThunderIcon from "../../assets/thunder.svg";
+import { useWeatherContext } from "../../hooks/useWeatherContext";
+import { getFormattedDate } from "../../utils/date-utils";
 
 function WeatherHeadline() {
+  const { weatherData } = useWeatherContext();
+  const {climate, location, temperature, time} = weatherData || {};
+
   function getWeatherIcon(climate) {
     switch (climate) {
       case "Rain":
@@ -20,9 +25,7 @@ function WeatherHeadline() {
       case "Thunder":
         return ThunderIcon;
       case "Fog":
-        return HazeIcon;
       case "Haze":
-        return HazeIcon;
       case "Mist":
         return HazeIcon;
 
@@ -34,18 +37,18 @@ function WeatherHeadline() {
   return (
     <div>
       <div className="max-md:flex items-center justify-between md:-mt-10">
-        <img src={getWeatherIcon("")} alt="climate" />
+        <img src={getWeatherIcon(climate)} alt="climate" />
         <div className="max-md:flex items-center max-md:space-x-4">
           <h1 className="text-[60px] lg:text-[80px] xl:text-[100px] leading-none md:mb-4">
-            {Math.round(16.5)}°
+            {Math.round(temperature)}°
           </h1>
           <div className="flex items-center space-x-4 md:mb-4">
             <img src={PinIcon} alt="pin" />
-            <h2 className="text-2xl lg:text-[50px]">{'Dhaka'}</h2>
+            <h2 className="text-2xl lg:text-[50px]">{location}</h2>
           </div>
         </div>
       </div>
-      <p className="text-sm lg:text-lg">06:09 - Sunday, 9 Dec ‘25</p>
+      <p className="text-sm lg:text-lg">{getFormattedDate(time, "time", false)} - {getFormattedDate(time, "date", false)}</p>
     </div>
   );
 }
