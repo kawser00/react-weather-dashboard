@@ -6,9 +6,9 @@ import react from 'eslint-plugin-react'
 import { defineConfig, globalIgnores } from 'eslint/config'
 
 export default defineConfig([
-  globalIgnores(['dist']),
+  globalIgnores(["dist"]),
   {
-    files: ['**/*.{js,jsx}'],
+    files: ["**/*.{js,jsx}"],
     extends: [
       js.configs.recommended,
       react.configs.flat.recommended,
@@ -19,20 +19,22 @@ export default defineConfig([
       ecmaVersion: 2020,
       globals: globals.browser,
       parserOptions: {
-        ecmaVersion: 'latest',
+        ecmaVersion: "latest",
         ecmaFeatures: { jsx: true },
-        sourceType: 'module',
+        sourceType: "module",
       },
     },
     settings: {
       react: {
-        version: 'detect',
+        version: "detect",
       },
     },
     rules: {
-      'react/react-in-jsx-scope': 'off',
-      'react/jsx-uses-react': 'off',
-      'react/prop-types': 'off',
+      "react/react-in-jsx-scope": "off",
+      "react/jsx-uses-react": "off",
+      "react/prop-types": "off",
+      "no-undef": "error",
+      "no-unused-vars": "warn",
     },
   },
-])
+]);

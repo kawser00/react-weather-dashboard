@@ -1,5 +1,6 @@
 import Header from "./components/header/Header.jsx";
 import climateImage from "./assets/body-bg.png";
+import WeatherBoard from "./components/weather/WeatherBoard.jsx";
 
 const Page = () => {
   return (
@@ -8,6 +9,11 @@ const Page = () => {
       className="grid place-items-center h-screen bg-no-repeat bg-cover text-white"
     >
       <Header />
+      <main className="w-full">
+        <section className="w-full">
+          <WeatherBoard />
+        </section>
+      </main>
     </div>
   );
 };
