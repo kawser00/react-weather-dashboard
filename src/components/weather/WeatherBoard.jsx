@@ -1,11 +1,10 @@
-import { useWeather } from "../../hooks";
+import { useWeatherContext } from '../../hooks';
 import AddToFavorite from "./AddToFavorite";
 import WeatherCondition from "./WeatherCondition";
 import WeatherHeadline from "./WeatherHeadline";
 
-
 function WeatherBoard() {
-  const {loading, error, weatherData} = useWeather();
+  const {loading, error, weatherData} = useWeatherContext();
   console.log({loading, error, weatherData});
   return (
     <div className="grid bg-black/20 rounded-xl backdrop-blur-md border-2 lg:border-[3px] border-white/14 px-4 lg:px-14 py-6 lg:py-10 min-h-[520px] max-w-[1058px] mx-auto">
