@@ -64,7 +64,7 @@ const useWeather = () => {
     } finally {
       setLoading((prev) => ({
         ...prev,
-        state: true,
+        state: false,
         message: "",
       }));
     }
