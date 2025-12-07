@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { FavoriteContext } from "../context";
 
-export const useFavoriteContext = () => {
+const useFavoriteContext = () => {
   const context = useContext(FavoriteContext);
   if (!context) {
     throw new Error(
@@ -10,3 +10,5 @@ export const useFavoriteContext = () => {
   }
   return context;
 };
+
+export default useFavoriteContext;

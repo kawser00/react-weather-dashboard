@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
+import useLocationContext from "./useLocationContext";
 
 const useWeather = () => {
   const [error, setError] = useState(null);
@@ -20,13 +21,16 @@ const useWeather = () => {
     latitude: "",
   });
 
+  const { selectedLocation } = useLocationContext();
+
   const fetchWeatherData = async (lat, lon) => {
     try {
       setError(null);
-      setLoading({
+      setLoading((prev) => ({
+        ...prev,
         state: true,
         message: "Fetching weather data...",
-      });
+      }));
 
       const response = await fetch(
         `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${
@@ -58,27 +62,30 @@ const useWeather = () => {
     } catch (err) {
       setError(err);
     } finally {
-      setLoading({
-        state: false,
+      setLoading((prev) => ({
+        ...prev,
+        state: true,
         message: "",
-      });
+      }));
     }
   };
 
-  useEffect(()=> {
-    setLoading({
+  useEffect(() => {
+    setLoading((prev) => ({
+      ...prev,
       state: true,
-      message: "Fetching location...",
-    });
-
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
+      message: "Getting user location...",
+    }));
+    if (selectedLocation.latitude && selectedLocation.longitude) {
+      const { latitude, longitude } = selectedLocation;
+      fetchWeatherData(latitude, longitude);
+    } else {
+      navigator.geolocation.getCurrentPosition((position) => {
         const { latitude, longitude } = position.coords;
         fetchWeatherData(latitude, longitude);
-      }
-    );
-
-  },[])
+      });
+    }
+  }, [selectedLocation]);
 
   return {
     weatherData,

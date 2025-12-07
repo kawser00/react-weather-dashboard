@@ -5,7 +5,7 @@ import SunnyIcon from "../../assets/icons/sunny.svg";
 import PinIcon from "../../assets/pin.svg";
 import RainIcon from "../../assets/rainy.svg";
 import ThunderIcon from "../../assets/thunder.svg";
-import { useWeatherContext } from "../../hooks/useWeatherContext";
+import { useWeatherContext } from "../../hooks";
 import { getFormattedDate } from "../../utils/date-utils";
 
 function WeatherHeadline() {

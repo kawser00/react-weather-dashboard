@@ -1,8 +1,7 @@
 import { useState, useEffect } from "react";
 import RedHeartIcon from "../../assets/heart-red.svg";
 import HeartIcon from "../../assets/heart.svg";
-import { useWeatherContext } from "../../hooks";
-import { useFavoriteContext } from "../../hooks/useFavoriteContext";
+import { useFavoriteContext, useWeatherContext } from "../../hooks";
 
 function AddToFavorite() {
   const [isFavorite, setIsFavorite] = useState(false);

@@ -1,9 +1,18 @@
 import SearchIcon from "../../assets/search.svg";
+import { getLocationByName } from "../../data/location-data";
+import { useDebounce, useLocationContext } from "../../hooks";
 
 function Search() {
+  const { setSelectedLocation } = useLocationContext();
+
+  const doSearch = useDebounce((term) => {
+    const fetchedLocation = getLocationByName(term);
+    setSelectedLocation({ ...fetchedLocation });
+  }, 500);
+
   function handleChange(e) {
     const value = e.target.value;
-    console.log(value);
+    doSearch(value);
   }
 
   return (
